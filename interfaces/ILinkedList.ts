@@ -1,5 +1,7 @@
+export type LinkedListNodeValue = string | number
+
 export interface ILinkedListNode {
-  value: string | number
+  value: LinkedListNodeValue
   next: ILinkedListNode | null
 }
 
@@ -8,10 +10,10 @@ export interface ILinkedList {
   tail: ILinkedListNode | null
   size: number
 
-  Append: (value: string | number) => ILinkedList
-  Prepend: (value: string | number) => ILinkedList
-  Search: (value: string | number) => ILinkedListNode | null
-  Delete: (value: string | number) => ILinkedList | null
+  Append: (value: LinkedListNodeValue) => ILinkedList
+  Prepend: (value: LinkedListNodeValue) => ILinkedList
+  Search: (value: LinkedListNodeValue) => ILinkedListNode | null
+  Delete: (value: LinkedListNodeValue) => ILinkedList | null
   GetFirstItem: () => ILinkedListNode | null
   GetLastItem: () => ILinkedListNode | null
   PrettyPrint: () => string

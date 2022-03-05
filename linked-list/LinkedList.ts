@@ -1,4 +1,4 @@
-import { ILinkedList, ILinkedListNode } from '../interfaces/ILinkedList'
+import { ILinkedList, ILinkedListNode, LinkedListNodeValue } from '../interfaces/ILinkedList'
 
 class LinkedListNode implements ILinkedListNode {
   value: any
@@ -20,7 +20,7 @@ export class LinkedList implements ILinkedList {
     this.size = 0
   }
 
-  Append(value: string | number): ILinkedList {
+  Append(value: LinkedListNodeValue): ILinkedList {
     if (this.isListEmpty()) {
       this.head = this.tail = new LinkedListNode(value)
       return this
@@ -35,7 +35,7 @@ export class LinkedList implements ILinkedList {
     return this
   }
 
-  Prepend(value: string | number): ILinkedList {
+  Prepend(value: LinkedListNodeValue): ILinkedList {
     if (this.isListEmpty()) {
       this.head = this.tail = new LinkedListNode(value)
       return this
@@ -50,7 +50,7 @@ export class LinkedList implements ILinkedList {
     return this
   }
 
-  Search(value: string | number): ILinkedListNode | null {
+  Search(value: LinkedListNodeValue): ILinkedListNode | null {
     if (this.isListEmpty()) {
       return null
     }
@@ -66,7 +66,7 @@ export class LinkedList implements ILinkedList {
     return null
   }
 
-  Delete(value: string | number): ILinkedList | null {
+  Delete(value: LinkedListNodeValue): ILinkedList | null {
     if (this.isListEmpty()) {
       return null
     }
