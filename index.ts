@@ -1,1 +1,11 @@
-console.log("Hello World");
+import { LinkedList } from './LinkedList'
+
+const MyList = new LinkedList()
+MyList.Append('Brad')
+MyList.Append('John')
+MyList.Append('Kent')
+MyList.Append('Erik')
+MyList.Prepend('Colt')
+MyList.Delete('Erik')
+
+console.log(MyList.PrettyPrint())

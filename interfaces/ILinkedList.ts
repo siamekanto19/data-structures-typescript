@@ -1,7 +1,6 @@
 export interface ILinkedListNode {
-  value: any
+  value: string | number
   next: ILinkedListNode | null
-  prev: ILinkedListNode | null
 }
 
 export interface ILinkedList {
@@ -9,7 +8,12 @@ export interface ILinkedList {
   tail: ILinkedListNode | null
   size: number
 
-  Append: (value: any) => ILinkedList
-  Prepend: (value: any) => ILinkedList
-  Search: (value: any) => ILinkedListNode | null
+  Append: (value: string | number) => ILinkedList
+  Prepend: (value: string | number) => ILinkedList
+  Search: (value: string | number) => ILinkedListNode | null
+  Delete: (value: string | number) => ILinkedList | null
+  GetFirstItem: () => ILinkedListNode | null
+  GetLastItem: () => ILinkedListNode | null
+  PrettyPrint: () => string
+  Size: () => number
 }

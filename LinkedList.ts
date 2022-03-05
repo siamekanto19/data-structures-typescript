@@ -3,12 +3,9 @@ import { ILinkedList, ILinkedListNode } from './interfaces/ILinkedList'
 class LinkedListNode implements ILinkedListNode {
   value: any
   next: ILinkedListNode | null
-  prev: ILinkedListNode | null
-
   constructor(value: any) {
     this.value = value
     this.next = null
-    this.prev = null
   }
 }
 
@@ -23,49 +20,42 @@ export class LinkedList implements ILinkedList {
     this.size = 0
   }
 
-  Append(value: any): ILinkedList {
-    if (!this.head && !this.tail) {
+  Append(value: string | number): ILinkedList {
+    if (this.isListEmpty()) {
       this.head = this.tail = new LinkedListNode(value)
       return this
     }
-
     if (this.tail) {
       const oldTail = this.tail
       const newTail = new LinkedListNode(value)
       oldTail.next = newTail
-      newTail.prev = oldTail
       this.tail = newTail
-
-      return this
     }
-
+    this.size++
     return this
   }
 
-  Prepend(value: any): ILinkedList {
-    if (!this.head && !this.tail) {
+  Prepend(value: string | number): ILinkedList {
+    if (this.isListEmpty()) {
       this.head = this.tail = new LinkedListNode(value)
       return this
     }
 
-    if (this.head) {
-      const oldHead = this.head
-      const newHead = new LinkedListNode(value)
-      oldHead.prev = newHead
-      newHead.next = oldHead
-      this.head = newHead
-
-      return this
-    }
+    const oldHead = this.head
+    const newHead = new LinkedListNode(value)
+    newHead.next = oldHead
+    this.head = newHead
+    this.size++
 
     return this
   }
 
-  Search(value: any): LinkedListNode | null {
-    if (!this.head && !this.tail) {
+  Search(value: string | number): ILinkedListNode | null {
+    if (this.isListEmpty()) {
       return null
     }
-    let currentHead = this.head
+    let currentHead: ILinkedListNode | null = this.head
+
     while (currentHead) {
       if (currentHead.value === value) {
         return currentHead
@@ -74,5 +64,61 @@ export class LinkedList implements ILinkedList {
     }
 
     return null
+  }
+
+  Delete(value: string | number): ILinkedList | null {
+    if (this.isListEmpty()) {
+      return null
+    }
+    let currentNode: ILinkedListNode | null = this.head
+
+    while (currentNode) {
+      if (currentNode.next && currentNode.next.value === value) {
+        currentNode.next = currentNode.next.next
+        return this
+      }
+      currentNode = currentNode.next
+    }
+
+    this.size--
+
+    return null
+  }
+
+  PrettyPrint(): string {
+    const values: string[] = []
+    let currentNode = this.head
+    while (currentNode) {
+      if (!currentNode.next) {
+        values.push(`${currentNode.value} -> null`)
+      } else {
+        values.push(`${currentNode.value} -> `)
+      }
+      currentNode = currentNode.next
+    }
+
+    return values.join('')
+  }
+
+  Size(): number {
+    return this.size
+  }
+
+  GetFirstItem(): LinkedListNode | null {
+    return this.head
+  }
+
+  GetLastItem(): LinkedListNode | null {
+    return this.tail
+  }
+
+  // Private Methods
+  private insertAtNext(newNode: ILinkedListNode | null, targetNode: ILinkedListNode | null): void {
+    if (targetNode) {
+      targetNode.next = newNode
+    }
+  }
+  private isListEmpty(): boolean {
+    return !this.head && !this.tail
   }
 }
