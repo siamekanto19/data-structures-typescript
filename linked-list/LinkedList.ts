@@ -1,4 +1,4 @@
-import { ILinkedList, ILinkedListNode } from './interfaces/ILinkedList'
+import { ILinkedList, ILinkedListNode } from '../interfaces/ILinkedList'
 
 class LinkedListNode implements ILinkedListNode {
   value: any
